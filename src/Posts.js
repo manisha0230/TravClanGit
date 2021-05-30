@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Data from "./data";
 
 const Posts = ({ posts, loading }) => {
-  const [bid, setBid] = useState([]);
   if (loading) {
     return <h2>Loading...</h2>;
   }
@@ -17,9 +16,14 @@ const Posts = ({ posts, loading }) => {
       return max;
     }
   }
-  function handleClick(data) {
-    console.log("hi");
+  function details(post) {
+    console.log(post);
   }
+  function setBidMin(bid) {
+    console.log(bid);
+    document.getElementById("bid" + bid.id).innerText = bid.minBid;
+  }
+
   return (
     <table id="customers">
       <tr>
@@ -30,7 +34,7 @@ const Posts = ({ posts, loading }) => {
         <th id="bid">Bid (Max/Min)</th>
       </tr>
       {posts.map((post, id) => (
-        <tr id={"post" + id} onclick={handleClick(post)}>
+        <tr id={"post" + id} onClick={() => details(post)}>
           <td>
             <div className="avtar">
               <img className="avatarimg" src={post.avatarUrl} />
@@ -41,15 +45,12 @@ const Posts = ({ posts, loading }) => {
           <td>{post.phone}</td>
 
           <td>{post.hasPremium ? "Yes" : "No"}</td>
-          <td id={"bid" + id}>
+          <td id={"bid" + post.id}>
             <div className="bid">
               <div className="amount">
                 {calculate(post.bids ? post.bids : null)}
               </div>
-              <label class="switch">
-                <input type="checkbox" checked />
-                <span class="slider round"></span>
-              </label>
+              <button onClick={() => setBidMin(post)}>Min</button>
             </div>
           </td>
         </tr>

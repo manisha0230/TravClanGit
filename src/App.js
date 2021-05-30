@@ -55,6 +55,7 @@ const App = () => {
     console.log(posts);
     sorted(posts);
   }
+
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
