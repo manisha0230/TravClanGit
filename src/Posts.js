@@ -5,17 +5,7 @@ const Posts = ({ posts, loading }) => {
   if (loading) {
     return <h2>Loading...</h2>;
   }
-  function calculate(bids) {
-    if (bids) {
-      let max = 0;
-      for (let i = 0; i < bids.length; i++) {
-        if (bids[i].amount > max) {
-          max = bids[i].amount;
-        }
-      }
-      return max;
-    }
-  }
+
   function details(post) {
     console.log(post);
   }
@@ -47,9 +37,7 @@ const Posts = ({ posts, loading }) => {
           <td>{post.hasPremium ? "Yes" : "No"}</td>
           <td id={"bid" + post.id}>
             <div className="bid">
-              <div className="amount">
-                {calculate(post.bids ? post.bids : null)}
-              </div>
+              <div className="amount">{post.maxBid}</div>
               <button onClick={() => setBidMin(post)}>Min</button>
             </div>
           </td>
